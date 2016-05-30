@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ZX-service">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.main.java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src.main.resouce"/>
+        <property name="context-root" value="ZX-service"/>
+        <property name="java-output-path" value="/ZX-service/target/classes"/>
+    </wb-module>
+</project-modules>

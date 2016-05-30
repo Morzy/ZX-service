@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:jee="http://www.springframework.org/schema/jee" xmlns:sec="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+                           http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+                           
+<!--     <http pattern="/services/**/login" security="none" xmlns="http://www.springframework.org/schema/security"/>
+    <http pattern="/services/public/**" security="none" xmlns="http://www.springframework.org/schema/security"/>
+    <http pattern="/services/vipInteraction/**" security="none" xmlns="http://www.springframework.org/schema/security"/>
+    <http pattern="/version.html" security="none" xmlns="http://www.springframework.org/schema/security"/>
+    <http pattern="/ping.html" security="none" xmlns="http://www.springframework.org/schema/security"/>
+	
+    <http pattern="/services" create-session="stateless" disable-url-rewriting="false" 
+        use-expressions="true" entry-point-ref="oauthRedirectAuthenticationEntryPoint" xmlns="http://www.springframework.org/schema/security">
+        <intercept-url pattern="/services" access="isAnonymous()" />
+        <anonymous enabled="true" />
+    </http>
+
+    <http pattern="/services/**/_wadl_" create-session="stateless" disable-url-rewriting="false" 
+        use-expressions="true" entry-point-ref="oauthRedirectAuthenticationEntryPoint" xmlns="http://www.springframework.org/schema/security">
+        <intercept-url pattern="/services/**/_wadl_" access="isAnonymous()" />
+
+        <anonymous enabled="true" />
+    </http>
+
+    <http pattern="/services/.*_wadl" request-matcher="regex" create-session="stateless" disable-url-rewriting="false" 
+        use-expressions="true" entry-point-ref="oauthRedirectAuthenticationEntryPoint" xmlns="http://www.springframework.org/schema/security">
+        <intercept-url pattern="/services/.*_wadl" access="isAnonymous()" />
+
+        <anonymous enabled="true" />
+    </http>
+    
+     <http pattern="/services/**" create-session="stateless" disable-url-rewriting="false"  auto-config="false"
+        use-expressions="true" entry-point-ref="oauthRedirectAuthenticationEntryPoint" xmlns="http://www.springframework.org/schema/security">
+    	
+    	<intercept-url pattern="/services/**"/>
+    	 <anonymous enabled="false" />
+    	
+        <http-basic entry-point-ref="oauthRedirectAuthenticationEntryPoint" />
+        <custom-filter ref="oauthTokenAuthenticationFilter" before="FORM_LOGIN_FILTER" />
+        <access-denied-handler ref="vportalAccessDeniedHandler" />
+        <expression-handler ref="oauthWebExpressionHandler" />
+    </http> -->
+   
+      
+ <!--    <bean id="oauthTokenAuthenticationFilter" class="com.hbo.esp.security.oauth2.client.filter.OAuthTokenAuthenticationFilter">
+        <property name="oauthServer" value="${oauth2.serverUrl}" />
+        <property name="authRestTemplate" ref="restTemplateCommon" />
+    </bean> -->
+    
+<!--      <authentication-manager alias="authenticationManager" xmlns="http://www.springframework.org/schema/security">
+        
+    </authentication-manager>
+    
+    <bean id="oauthRedirectAuthenticationEntryPoint" class="com.hbo.esp.security.oauth2.client.endpoint.OAuthRedirectAuthenticationEntryPoint" />
+    
+    <bean id="vportalAccessDeniedHandler" class="com.hbo.esp.security.oauth2.client.error.EspAccessDeniedHandler" />
+     
+    <bean id="oauthToken" class="com.hbo.esp.security.oauth2.client.model.OAuthToken" />
+    
+    <bean id="oauth2MethodSecurityExpressionHandler" class="org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler" />
+    
+    <bean id="oauthWebExpressionHandler" class="org.springframework.security.oauth2.provider.expression.OAuth2WebSecurityExpressionHandler" />
+    
+    <bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased" xmlns="http://www.springframework.org/schema/beans">
+        <constructor-arg>
+            <list>
+                <bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter" />
+                <bean class="org.springframework.security.access.vote.RoleVoter" />
+                <bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+            </list>
+        </constructor-arg>
+    </bean>
+    
+   <sec:global-method-security pre-post-annotations="enabled" proxy-target-class="true">
+        <sec:expression-handler ref="oauth2MethodSecurityExpressionHandler" />
+    </sec:global-method-security> -->
+    
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	   <property name="messageConverters">
+	       <list>
+	           <ref bean="jsonConverter" />   
+	       </list>
+	   </property>
+	</bean>         
+	
+	<bean id="jsonConverter" 
+	            class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	   <property name="supportedMediaTypes" value="application/json" />
+	</bean>                           
+                           
+</beans>
